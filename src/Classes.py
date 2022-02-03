@@ -17,7 +17,7 @@ class Vec3:
 
 
 class PropData:
-    """ Represents the data for a prop in Apex Legends"""
+    """ Represents the data for a prop in Titanfall"""
     def __init__(self, string: str):
         self.myHash = hash(string)
 
@@ -62,7 +62,7 @@ class PropData:
         """ Just returns the hash, makes it easier to compare props """
         return self.myHash
 
-
+#TODO: Ziplines
 class Zipline(PropData):
     """ Represents the data for a zipline """
     def __init__(self, start: str, end: str):

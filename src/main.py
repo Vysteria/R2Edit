@@ -4,7 +4,7 @@ from Classes import Zipline
 
 # Sets up argparse
 parser = argparse.ArgumentParser(description='Creates a map from prop data')
-parser.add_argument('input', metavar='input', type=str, help='R5R log output in a file')
+parser.add_argument('input', metavar='input', type=str, help='R2 log output in a file')
 parser.add_argument('output', metavar='output', type=str, default="map.gnut", help='The name of the map')
 
 args = parser.parse_args()
@@ -19,11 +19,18 @@ propsFormatted = ""
 
 HEADER = '''void function SpawnEditorProps()
 {
-    // Written by mostly fireproof. Let me know if there are any issues!
+    // Written by mostly fireproof. dm Pebbers if it has any issues!
     printl("---- NEW EDITOR DATA ----")
 '''
 
 FOOTER = '''
+    void function CreateMapProp(asset a, vector pos, vector ang, bool mantle, float fade) {
+        entity e = CreatePropDynamic(a,pos,ang,SOLID_VPHYSICS,fade)
+        e.kv.fadedist = fade
+        if (mantle) e.AllowMantle()
+        
+        e.SetScriptName("editor_placed_prop")
+    }
 }
 '''
 
@@ -53,7 +60,7 @@ def handleInput():
 
     # process every command
     for s in allCommands[lastBootUp:]:
-        i = s.find("[editor]")      # placing objects
+        i = s.find("[place]")      # placing objects
         r = s.find("[delete]")      # deleting objects
         z = s.find("[zipline]")         # placing ziplines
         p = s.find("[pickup]")      # placing pickups (grenades, weapons)
@@ -93,9 +100,10 @@ def process():
     for p in props.values():
         decoded = p.decode()
         if isinstance(p, Zipline):
+            #TODO: Zips
             propsFormatted += createZip(decoded)
         else:
-            propsFormatted += createEditorProp(decoded)
+            propsFormatted += createMapProp(decoded)
 
     propsFormatted += FOOTER
 
@@ -108,9 +116,9 @@ def export():
     print("--------------\nSuccess!")
 
 
-def createEditorProp(propInfo: str) -> str:
+def createMapProp(propInfo: str) -> str:
     """ Creates a prop """
-    return "    CreateEditorProp( " + propInfo + " )\n"
+    return "    CreateMapProp( " + propInfo + " )\n"
 
 
 def createZip(zipInfo: str) -> str:
