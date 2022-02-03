@@ -47,10 +47,9 @@ class PropData:
     def decode(self) -> str:
         """ Turns the data in the class in to a string that the engine can take """
         # takes the data from the object
-        output = "$\"" + self.model + "\", " + self.devector(self.position) + ", " + self.devector(self.angles)
+        output = "$" + self.model + ", " + self.devector(self.position) + ", " + self.devector(self.angles)
         # adds on extra data for mantle (?) and draw distance
         output += ", true, 8000"
-        output += ", " + self.realm
         return output
 
     def devector(self, string: list) -> str:
