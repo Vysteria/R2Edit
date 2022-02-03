@@ -24,13 +24,14 @@ HEADER = '''void function SpawnEditorProps()
 '''
 
 FOOTER = '''
-    void function CreateMapProp(asset a, vector pos, vector ang, bool mantle, float fade) {
-        entity e = CreatePropDynamic(a,pos,ang,SOLID_VPHYSICS,fade)
-        e.kv.fadedist = fade
-        if (mantle) e.AllowMantle()
+    
+}
+void function CreateMapProp(asset a, vector pos, vector ang, bool mantle, float fade) {
+    entity e = CreatePropDynamic(a,pos,ang,SOLID_VPHYSICS,fade)
+    e.kv.fadedist = fade
+    if (mantle) e.AllowMantle()
         
-        e.SetScriptName("editor_placed_prop")
-    }
+    e.SetScriptName("editor_placed_prop")
 }
 '''
 
