@@ -17,7 +17,16 @@ allCommands = fIn.readlines()
 props = {}
 propsFormatted = ""
 
-HEADER = '''void function SpawnEditorProps()
+HEADER = '''
+untyped
+global function CodeCallback_MapInit
+
+void function CodeCallback_MapInit()
+{
+	SpawnEditorProps()
+}
+
+void function SpawnEditorProps()
 {
     // Written by mostly fireproof. dm Pebbers if it has any issues!
     printl("---- NEW EDITOR DATA ----")
