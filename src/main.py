@@ -32,6 +32,9 @@ void function CreateMapProp(asset a, vector pos, vector ang, bool mantle, float 
     if (mantle) e.AllowMantle()
         
     e.SetScriptName("editor_placed_prop")
+    string positionSerialized = pos.x.tostring() + "," + pos.y.tostring() + "," + pos.z.tostring()
+	string anglesSerialized = ang.x.tostring() + "," + ang.y.tostring() + "," + ang.z.tostring()
+    printl("[place]" + string(a) + ";" + positionSerialized + ";" + anglesSerialized)
 }
 '''
 
