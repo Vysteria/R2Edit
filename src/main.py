@@ -82,14 +82,14 @@ def handleInput():
             # what is error handling and input checking
             try:
                 pr = PropData(s[i+8:])
-                props[pr.getHash()] = pr
+                props[hash(s[i+7:])] = pr
             except:
                 print("Invalid input: " + s)
 
         elif r > 0:
             try:
                 toRemove = s[r+8:]
-                del props[hash(toRemove)]
+                del props[hash(s[r+8:])]
             except:
                 print("Problem removing: " + s)
 

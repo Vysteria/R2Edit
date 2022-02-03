@@ -54,7 +54,7 @@ class PropData:
 
     def devector(self, string: list) -> str:
         """ Turns a stringified vector back in to numbers """
-        output = "<" + string[0] + "," + string[1] + "," + string[2] + ">"
+        output = "< " + string[0] + "," + string[1] + "," + string[2] + ">"
         return output
 
     def getHash(self) -> int:
